@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FORCE CLEAN WHITE UI */
+body {
+  background-color: white;
+  color: black;
+  font-family: Arial, sans-serif;
+}
