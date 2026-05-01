@@ -1,101 +1,121 @@
 "use client";
 
 import Navbar from "@/components/navbar";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Sparkles, BrainCircuit, Calendar, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+
+import { api } from "@/services/api";
 
 export default function GeneratePage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    academicYear: "2024-2025",
+    semester: "Even",
+    department: "Computer Engineering",
+  });
+
   const generate = async () => {
-    try {
-      const res = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyDG9Q9mlDupgbAc6zU8tRAbfJJErWCVkNI",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [
-                  {
-                    text: `
-Generate STRICT JSON timetable.
-
-Rules:
-- 5 days (Monday–Friday)
-- 6 slots each
-- subjects: Math, Physics, CS, English
-- no subject repeats in same day
-
-Return ONLY JSON array.
-No explanation. No text. No markdown.
-                    `,
-                  },
-                ],
-              },
-            ],
-          }),
-        }
-      );
-
-      const data = await res.json();
-
-      console.log("RAW RESPONSE:", data);
-
-      let text =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-
-      if (!text) {
-        alert("❌ Empty response from AI");
-        return;
-      }
-
-      // CLEAN MARKDOWN
-      text = text.replace(/```json|```/g, "").trim();
-
-      console.log("CLEANED TEXT:", text);
-
-      let json;
-
-      try {
-        json = JSON.parse(text);
-      } catch (err) {
-        console.error("❌ JSON PARSE FAILED:", text);
-
-        alert("⚠️ AI returned invalid format. Try again.");
-        return;
-      }
-
-      // BASIC VALIDATION
-      if (!Array.isArray(json)) {
-        alert("⚠️ Invalid structure from AI");
-        return;
-      }
-
-      // SAVE
-      localStorage.setItem("timetable", JSON.stringify(json));
-
-      alert("✅ Timetable Generated!");
-      window.location.href = "/timetable";
-
-    } catch (err) {
-      console.error("❌ GENERATION ERROR:", err);
-      alert("❌ API failed");
-    }
+    setLoading(true);
+    const result = await api.generateTimetable(formData);
+    localStorage.setItem("timetable", JSON.stringify(result));
+    setLoading(false);
+    router.push("/timetable");
   };
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-50">
       <Navbar />
 
-      <div className="p-8 w-full">
-        <h1 className="text-3xl font-bold mb-6">
-          AI Timetable Generator
-        </h1>
+      <div className="flex-1 ml-64 p-8 xl:p-12">
+        <header className="mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
+            <Sparkles className="h-8 w-8 text-indigo-500" />
+            AI Generator
+          </h1>
+          <p className="text-gray-500 mt-1">Configure parameters and let the AI resolve constraints.</p>
+        </header>
 
-        <button
-          onClick={generate}
-          className="bg-red-600 text-white px-6 py-2 rounded"
-        >
-          Generate Timetable
-        </button>
+        <div className="max-w-3xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+          >
+            <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-8 text-white relative overflow-hidden">
+              <div className="absolute right-0 top-0 opacity-10 translate-x-1/4 -translate-y-1/4">
+                <BrainCircuit className="h-48 w-48" />
+              </div>
+              <h2 className="text-2xl font-bold mb-2 relative z-10">Timetable Constraints Engine</h2>
+              <p className="text-indigo-100 relative z-10">The engine automatically balances faculty load, prevents room clashes, and optimizes slot placement.</p>
+            </div>
+
+            <div className="p-8 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Academic Year</label>
+                  <select 
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                    value={formData.academicYear}
+                    onChange={(e) => setFormData({...formData, academicYear: e.target.value})}
+                  >
+                    <option>2023-2024</option>
+                    <option>2024-2025</option>
+                    <option>2025-2026</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Semester</label>
+                  <select 
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                    value={formData.semester}
+                    onChange={(e) => setFormData({...formData, semester: e.target.value})}
+                  >
+                    <option>Odd</option>
+                    <option>Even</option>
+                  </select>
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                  <select 
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                    value={formData.department}
+                    onChange={(e) => setFormData({...formData, department: e.target.value})}
+                  >
+                    <option>Computer Engineering</option>
+                    <option>Information Technology</option>
+                    <option>Electronics & Telecommunication</option>
+                    <option>Mechanical Engineering</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-gray-100 flex justify-end">
+                <button
+                  onClick={generate}
+                  disabled={loading}
+                  className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-70 disabled:cursor-not-allowed text-white px-8 py-3 rounded-xl font-medium shadow-lg shadow-indigo-200 transition-all flex items-center gap-2"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      Resolving Constraints...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-5 w-5" />
+                      Generate Timetable
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -1,79 +1,99 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Lock, User } from "lucide-react";
+import { motion } from "framer-motion";
+
+import { api } from "@/services/api";
 
 export default function LoginPage() {
-  const [role, setRole] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const handleLogin = () => {
-    // 🟢 STUDENT / TEACHER (NO LOGIN REQUIRED)
-    if (role === "user") {
-      localStorage.setItem("role", "user");
-      window.location.href = "/timetable";
-      return;
-    }
-
-    // 🔴 ADMIN LOGIN
-    if (role === "admin") {
-      if (username === "admin" && password === "admin123") {
-        localStorage.setItem("role", "admin");
-        window.location.href = "/dashboard";
-      } else {
-        alert("Invalid admin credentials");
-      }
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const res = await api.login(username, password);
+    setLoading(false);
+    
+    if (res.success) {
+      localStorage.setItem("role", res.role || "admin");
+      router.push("/dashboard");
+    } else {
+      setError(res.error || "Invalid credentials.");
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
-      <div className="p-8 border rounded shadow w-80">
-        <h1 className="text-xl font-bold mb-4 text-center text-black">
-          STMS Login
-        </h1>
+    <div className="min-h-screen flex items-center justify-center gradient-bg relative overflow-hidden">
+      {/* Decorative background circles */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-white/10 blur-3xl" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-black/10 blur-3xl" />
 
-        {/* ROLE DROPDOWN */}
-        <select
-          className="w-full border p-2 mb-4 text-black"
-          onChange={(e) => setRole(e.target.value)}
-        >
-          <option value="">Select User Type</option>
-          <option value="admin">Admin</option>
-          <option value="user">Student / Teacher</option>
-        </select>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md"
+      >
+        <div className="glass p-10 rounded-3xl shadow-2xl relative z-10 mx-4">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">STMS</h1>
+            <p className="text-gray-600 mt-2 text-sm font-medium">Intelligent Timetable Management</p>
+          </div>
 
-        {/* ADMIN INPUTS */}
-        {role === "admin" && (
-          <>
-            <input
-              className="border p-2 w-full mb-3"
-              placeholder="Username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
+          <form onSubmit={handleLogin} className="space-y-6">
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-red-50 text-red-500 p-3 rounded-lg text-sm text-center font-medium border border-red-100"
+              >
+                {error}
+              </motion.div>
+            )}
 
-            <input
-              type="password"
-              className="border p-2 w-full mb-3"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </>
-        )}
+            <div className="space-y-4">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
 
-        <button
-          onClick={handleLogin}
-          className="w-full bg-red-600 text-white py-2 rounded"
-        >
-          Continue
-        </button>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
 
-        {role === "admin" && (
-          <p className="text-xs mt-3 text-gray-600 text-center">
-            Admin Login → admin / admin123
-          </p>
-        )}
-      </div>
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-gray-900 hover:bg-black text-white rounded-xl font-semibold shadow-lg shadow-gray-900/20 transform transition-all active:scale-[0.98]"
+            >
+              Sign In to Admin Panel
+            </button>
+          </form>
+        </div>
+      </motion.div>
     </div>
   );
 }

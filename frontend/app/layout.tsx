@@ -2,19 +2,27 @@
 
 import "./globals.css";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { Inter } from "next/font/google";
 
-export default function RootLayout({ children }: any) {
+const inter = Inter({ subsets: ["latin"] });
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const role = localStorage.getItem("role");
-    if (!role) router.push("/login");
-  }, []);
+    if (!role && pathname !== "/login") {
+      router.push("/login");
+    }
+  }, [pathname, router]);
 
   return (
-    <html>
-      <body>{children}</body>
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   );
 }
