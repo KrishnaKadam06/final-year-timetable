@@ -12,69 +12,72 @@ export const api = {
   },
 
   generateTimetable: async (params: { academicYear: string; semester: string; department: string }) => {
-    // TODO: Replace with real FastAPI call
-    // e.g. return await fetch("http://localhost:8000/timetable/generate", { ... })
+    // Construct term format (e.g. "Odd(2023-24)")
+    const parts = params.academicYear.split('-');
+    const yearShort = `${parts[0]}-${parts[1].slice(2)}`;
+    const term = `${params.semester}(${yearShort})`;
 
-    // MOCK AI Delay
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    
-    return [
-      {
-        day: "Monday",
-        slots: [
-          { subject: "Machine Learning", faculty: "Dr. Smith", room: "Room 101" },
-          { subject: "Data Structures", faculty: "Prof. Alan", room: "Lab 2" },
-          { subject: "Break", faculty: "", room: "" },
-          { subject: "Operating Systems", faculty: "Dr. Lin", room: "Room 102" },
-          { subject: "Computer Networks", faculty: "Prof. Sarah", room: "Room 103" },
-          { subject: "Free", faculty: "", room: "" },
-        ]
-      },
-      {
-        day: "Tuesday",
-        slots: [
-          { subject: "Database Systems", faculty: "Dr. E. Codd", room: "Room 201" },
-          { subject: "Web Dev", faculty: "Prof. Tim", room: "Lab 1" },
-          { subject: "Break", faculty: "", room: "" },
-          { subject: "Machine Learning", faculty: "Dr. Smith", room: "Room 101" },
-          { subject: "Operating Systems", faculty: "Dr. Lin", room: "Room 102" },
-          { subject: "Free", faculty: "", room: "" },
-        ]
-      },
-      {
-        day: "Wednesday",
-        slots: [
-          { subject: "Computer Networks", faculty: "Prof. Sarah", room: "Room 103" },
-          { subject: "Data Structures", faculty: "Prof. Alan", room: "Lab 2" },
-          { subject: "Break", faculty: "", room: "" },
-          { subject: "Web Dev", faculty: "Prof. Tim", room: "Lab 1" },
-          { subject: "Database Systems", faculty: "Dr. E. Codd", room: "Room 201" },
-          { subject: "Free", faculty: "", room: "" },
-        ]
-      },
-      {
-        day: "Thursday",
-        slots: [
-          { subject: "Operating Systems", faculty: "Dr. Lin", room: "Room 102" },
-          { subject: "Machine Learning", faculty: "Dr. Smith", room: "Room 101" },
-          { subject: "Break", faculty: "", room: "" },
-          { subject: "Computer Networks", faculty: "Prof. Sarah", room: "Room 103" },
-          { subject: "Data Structures", faculty: "Prof. Alan", room: "Lab 2" },
-          { subject: "Free", faculty: "", room: "" },
-        ]
-      },
-      {
-        day: "Friday",
-        slots: [
-          { subject: "Web Dev", faculty: "Prof. Tim", room: "Lab 1" },
-          { subject: "Database Systems", faculty: "Dr. E. Codd", room: "Room 201" },
-          { subject: "Break", faculty: "", room: "" },
-          { subject: "Mini Project", faculty: "Dr. Smith", room: "Lab 3" },
-          { subject: "Mini Project", faculty: "Dr. Smith", room: "Lab 3" },
-          { subject: "Free", faculty: "", room: "" },
-        ]
+    const response = await fetch(`http://127.0.0.1:8000/get-timetable/${term}`);
+    const result = await response.json();
+
+    if (result.status !== "success" || !result.data) {
+      throw new Error(result.message || "Failed to generate timetable");
+    }
+
+    const flatData = result.data;
+
+    const SUBJECT_YEAR_MAP: Record<string, string> = {
+        'AM-III': 'SY', 'EICS': 'SY', 'RSA': 'SY', 'DSA': 'SY', 'EDC': 'SY',
+        'MIS': 'TY', 'DCOM': 'TY', 'BEE': 'TY', 'DTSP': 'TY', 'DLD': 'TY',
+        'CSL': 'LY', 'PROJECT': 'LY', 'DOCM': 'LY', 'ROBO': 'LY', 'PBL MINI': 'SY'
+    };
+
+    const dayMapping: Record<number, string> = {
+      1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday'
+    };
+
+    const years = ['SY', 'TY', 'LY'];
+    const processed: Record<string, any[]> = {};
+
+    years.forEach(year => {
+      const yearGrid: any[] = [];
+      for (let d = 1; d <= 5; d++) {
+        const slots = [];
+        for (let s = 1; s <= 8; s++) {
+          slots.push({ subject: "", faculty: "", room: "" });
+        }
+        yearGrid.push({
+          day: dayMapping[d],
+          slots: slots
+        });
       }
-    ];
+      processed[year] = yearGrid;
+    });
+
+    flatData.forEach((item: any) => {
+      const year = SUBJECT_YEAR_MAP[item.subject] || 'UNKNOWN';
+      if (processed[year]) {
+        const dayIdx = item.day - 1;
+        const slotIdx = item.slot - 1;
+        if (dayIdx >= 0 && dayIdx < 5 && slotIdx >= 0 && slotIdx < 8) {
+          // If a slot is already occupied (like in parallel practicals/projects),
+          // we might append it, but for simplicity we join them if it exists.
+          const existing = processed[year][dayIdx].slots[slotIdx];
+          if (existing.subject && existing.subject !== item.subject) {
+            existing.subject += ` / ${item.subject}`;
+            existing.faculty += ` / ${item.faculty}`;
+          } else {
+            processed[year][dayIdx].slots[slotIdx] = {
+              subject: item.subject,
+              faculty: item.faculty,
+              room: item.type === "practical" ? "Lab" : "Classroom"
+            };
+          }
+        }
+      }
+    });
+
+    return processed;
   },
 
   validateTimetable: async (timetable: any[]) => {

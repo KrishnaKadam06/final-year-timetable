@@ -1,0 +1,156 @@
+batch,subject,faculty_initial,room,type,time,day,term,faculty_name
+,lic,sm,cr-10,lecture,10:40-11:40,Fri,Even(2023-24),Mr. Sandeep S. Mishra
+,mc,ra,cr-10,lecture,11:40-12:40,Fri,Even(2023-24),Ms. Rashmi R. Adatkar
+tyb,iot,pk,,lecture,1:10-2:10,Fri,Even(2023-24),Dr. Pradnya V. Kamble
+,ss,sp,cr-10,lecture,1:10-2:10,Fri,Even(2023-24),Mr. Sunil D. Patil
+,sbl-vi,mj,lab604,lab,2:10-3:10,Fri,Even(2023-24),Mr. Martand S. Jha
+sya2,ame-ii,pak,cr-10,tutorial,8:30-9:30,Fri,Even(2023-24),Unknown
+syb2,lic,ha,,lecture,8:30-9:30,Fri,Even(2023-24),Mr. Harshawardhan P. Ahire
+,ame-ii,pak,cr-10,lecture,9:30-10:30,Fri,Even(2023-24),Unknown
+lyb,soc,svm,,lecture,10:40-11:40,Mon,Even(2023-24),Mr. Sagar V. Mhatre
+,pce,td,cr-10,lecture,10:40-11:40,Mon,Even(2023-24),Ms. Tilottama P. Dhake
+,lic,sm,cr-10,lecture,11:40-12:40,Mon,Even(2023-24),Mr. Sandeep S. Mishra
+lyb2,av,pu,,lecture,1:10-2:10,Mon,Even(2023-24),Mr. Prashant B. Upadhyay
+tya,sap,ph,,lecture,1:10-2:10,Mon,Even(2023-24),Dr. Priya T. Hankare
+,lic,sm,cr-10,lecture,1:10-2:10,Mon,Even(2023-24),Mr. Sandeep S. Mishra
+,sap,ph,lab-606,lab,2:10-3:10,Mon,Even(2023-24),Dr. Priya T. Hankare
+sya1,pce,td,,lecture,8:30-9:30,Mon,Even(2023-24),Ms. Tilottama P. Dhake
+sya2,sbl-v,ph,,lecture,8:30-9:30,Mon,Even(2023-24),Dr. Priya T. Hankare
+sya3,mc,ra,,lecture,8:30-9:30,Mon,Even(2023-24),Ms. Rashmi R. Adatkar
+,pce,td,cr-10,lecture,10:40-11:40,Thu,Even(2023-24),Ms. Tilottama P. Dhake
+lyb,soc,svm,,lecture,11:40-12:40,Thu,Even(2023-24),Mr. Sagar V. Mhatre
+,pbl,pu,cr-10,lecture,11:40-12:40,Thu,Even(2023-24),Mr. Prashant B. Upadhyay
+tya,sap,ph,,lecture,1:10-2:10,Thu,Even(2023-24),Dr. Priya T. Hankare
+,ss,sp,cr-10,lecture,1:10-2:10,Thu,Even(2023-24),Mr. Sunil D. Patil
+sya3,ame-ii,pak,cr-10,tutorial,2:10-3:10,Thu,Even(2023-24),Unknown
+,fm,mj,,lecture,3:10-4:10,Thu,Even(2023-24),Mr. Martand S. Jha
+sya1,lic,rk,,lecture,8:30-9:30,Thu,Even(2023-24),Ms. Rupali S. Kadu
+sya2,pce,td,,lecture,8:30-9:30,Thu,Even(2023-24),Ms. Tilottama P. Dhake
+sya3,lic,sm,,lecture,8:30-9:30,Thu,Even(2023-24),Mr. Sandeep S. Mishra
+lyb,soc,svm,,lecture,9:30-10:30,Thu,Even(2023-24),Mr. Sagar V. Mhatre
+,mc,ra,cr-10,lecture,10:40-11:40,Tue,Even(2023-24),Ms. Rashmi R. Adatkar
+,ame-ii,pak,cr-10,lecture,11:40-12:40,Tue,Even(2023-24),Unknown
+lyb1,av,pu,,lecture,1:10-2:10,Tue,Even(2023-24),Mr. Prashant B. Upadhyay
+tyb,iot,pk,,lecture,1:10-2:10,Tue,Even(2023-24),Dr. Pradnya V. Kamble
+,ss,sp,cr-10,lecture,1:10-2:10,Tue,Even(2023-24),Mr. Sunil D. Patil
+sya1,ame-ii,pak,cr-10,tutorial,2:10-3:10,Tue,Even(2023-24),Unknown
+lyb,soc,svm,,lecture,3:10-4:10,Tue,Even(2023-24),Mr. Sagar V. Mhatre
+sya1,sbl-v,ph,,lecture,8:30-9:30,Tue,Even(2023-24),Dr. Priya T. Hankare
+sya2,mc,ra,,lecture,8:30-9:30,Tue,Even(2023-24),Ms. Rashmi R. Adatkar
+sya3,pce,td,,lecture,8:30-9:30,Tue,Even(2023-24),Ms. Tilottama P. Dhake
+syb3,lic,ha,,lecture,8:30-9:30,Tue,Even(2023-24),Mr. Harshawardhan P. Ahire
+,ame-ii,pak,cr-10,lecture,10:40-11:40,Wed,Even(2023-24),Unknown
+,mc,ra,cr-10,lecture,11:40-12:40,Wed,Even(2023-24),Ms. Rashmi R. Adatkar
+,pce,td,cr-10,lecture,1:10-2:10,Wed,Even(2023-24),Ms. Tilottama P. Dhake
+,sbl-vi,pg,lab605,lab,2:10-3:10,Wed,Even(2023-24),Mrs. Priya Gupta
+sya1,mc,ra,,lecture,8:30-9:30,Wed,Even(2023-24),Ms. Rashmi R. Adatkar
+sya2,lic,sm,,lecture,8:30-9:30,Wed,Even(2023-24),Mr. Sandeep S. Mishra
+sya3,sbl-v,td,,lecture,8:30-9:30,Wed,Even(2023-24),Ms. Tilottama P. Dhake
+sya1,mc,ra,lab-605a,lab,10:00-11:00,Fri,Even(2025-26),Ms. Rashmi R. Adatkar
+sya2,pbl-ii,mj,lab-601b,lab,10:00-11:00,Fri,Even(2025-26),Mr. Martand S. Jha
+sya3,sat-viii,pk,lab-701,lab,10:00-11:00,Fri,Even(2025-26),Dr. Pradnya V. Kamble
+sya4,m,prh,lab-605b,lab,10:00-11:00,Fri,Even(2025-26),Ms. Pranali P. Hatode
+,m,prh,cr-16,lecture,12:30-1:30,Fri,Even(2025-26),Ms. Pranali P. Hatode
+,ame-ii_c2,gd,cr-13,tutorial,8:00-9:00,Fri,Even(2025-26),Unknown
+,adce,td,cr-13,lecture,9:00-10:00,Fri,Even(2025-26),Ms. Tilottama P. Dhake
+,ame-ii,gd,cr-12,lecture,10:00-11:00,Mon,Even(2025-26),Unknown
+,ss,sp,cr-12,lecture,11:00-12:00,Mon,Even(2025-26),Mr. Sunil D. Patil
+sya1,adce,td,lab-602,lab,12:30-1:30,Mon,Even(2025-26),Ms. Tilottama P. Dhake
+sya2,mc,ra,lab-605a,lab,12:30-1:30,Mon,Even(2025-26),Ms. Rashmi R. Adatkar
+sya3,m,prh,lab-605b,lab,12:30-1:30,Mon,Even(2025-26),Ms. Pranali P. Hatode
+sya4,sat-viii,pk,lab-604b,lab,12:30-1:30,Mon,Even(2025-26),Dr. Pradnya V. Kamble
+,adce,td,cr-12,lecture,8:00-9:00,Mon,Even(2025-26),Ms. Tilottama P. Dhake
+,mc,ra,cr-12,lecture,9:00-10:00,Mon,Even(2025-26),Ms. Rashmi R. Adatkar
+,ame-ii,gd,cr-12,lecture,10:00-11:00,Thu,Even(2025-26),Unknown
+,mc,ra,cr-12,lecture,11:00-12:00,Thu,Even(2025-26),Ms. Rashmi R. Adatkar
+,m,prh,cr-11,lecture,12:30-1:30,Thu,Even(2025-26),Ms. Pranali P. Hatode
+,ame-ii_c1,gd,lab-606,lab,1:30-2:30,Thu,Even(2025-26),Unknown
+sya1,pbl-ii,pu,lab-601a,lab,8:00-9:00,Thu,Even(2025-26),Mr. Prashant B. Upadhyay
+sya2,m,prh,lab-605b,lab,8:00-9:00,Thu,Even(2025-26),Ms. Pranali P. Hatode
+sya3,pbl-ii,mj,lab-601b,lab,8:00-9:00,Thu,Even(2025-26),Mr. Martand S. Jha
+sya4,adce,td,lab-602,lab,8:00-9:00,Thu,Even(2025-26),Ms. Tilottama P. Dhake
+sya1,sat-viii,pk,lab-604a,lab,10:00-11:00,Tue,Even(2025-26),Dr. Pradnya V. Kamble
+sya2,adce,td,lab-602,lab,10:00-11:00,Tue,Even(2025-26),Ms. Tilottama P. Dhake
+sya3,mc,ha,lab-605a,lab,10:00-11:00,Tue,Even(2025-26),Mr. Harshawardhan P. Ahire
+sya4,pbl-ii,pu,lab-601b,lab,10:00-11:00,Tue,Even(2025-26),Mr. Prashant B. Upadhyay
+,ame-ii_c3,gd,lab-606,lab,12:30-1:30,Tue,Even(2025-26),Unknown
+,ss,sp,cr-12,lecture,8:00-9:00,Tue,Even(2025-26),Mr. Sunil D. Patil
+,ame-ii,gd,cr-12,lecture,9:00-10:00,Tue,Even(2025-26),Unknown
+,adce,td,cr-12,lecture,10:00-11:00,Wed,Even(2025-26),Ms. Tilottama P. Dhake
+,ss,sp,cr-12,lecture,11:00-12:00,Wed,Even(2025-26),Mr. Sunil D. Patil
+,m,prh,,lecture,12:30-1:30,Wed,Even(2025-26),Ms. Pranali P. Hatode
+sya1,m,prh,lab-605b,lab,1:30-2:30,Wed,Even(2025-26),Ms. Pranali P. Hatode
+sya2,sat-viii,pk,lab-703,lab,1:30-2:30,Wed,Even(2025-26),Dr. Pradnya V. Kamble
+sya3,adce,td,lab-602,lab,1:30-2:30,Wed,Even(2025-26),Ms. Tilottama P. Dhake
+sya4,mc,ra,lab-605a,lab,1:30-2:30,Wed,Even(2025-26),Ms. Rashmi R. Adatkar
+,mc,ra,cr-12,lecture,8:00-9:00,Wed,Even(2025-26),Ms. Rashmi R. Adatkar
+,sat-ix,sk,cr-12,lecture,9:00-10:00,Wed,Even(2025-26),Dr. Sandhya D. Kadam
+lya,mcs,pk,,lecture,10:00-11:00,Fri,Odd(2023-24),Dr. Pradnya V. Kamble
+sya,ent,pg,,lecture,11:00-12:00,Fri,Odd(2023-24),Mrs. Priya Gupta
+,ent,pg,cr15,lecture,11:00-12:00,Fri,Odd(2023-24),Mrs. Priya Gupta
+syb1,dld,sk,,lecture,12:30-1:30,Fri,Odd(2023-24),Dr. Sandhya D. Kadam
+,edc,na,cr10,lecture,12:30-1:30,Fri,Odd(2023-24),Dr. Namrata Ansari
+,pbl,pu,cr10,lecture,1:30-2:30,Fri,Odd(2023-24),Mr. Prashant B. Upadhyay
+sya,dld,sk,,lecture,2:40-3:40,Fri,Odd(2023-24),Dr. Sandhya D. Kadam
+,dld,sk,cr15,lecture,2:40-3:40,Fri,Odd(2023-24),Dr. Sandhya D. Kadam
+sya,eics,sm,,lecture,3:40-4:40,Fri,Odd(2023-24),Mr. Sandeep S. Mishra
+,eics,sm,cr15,lecture,3:40-4:40,Fri,Odd(2023-24),Mr. Sandeep S. Mishra
+sya1,dld,ak,,lecture,9:00-10:00,Fri,Odd(2023-24),Mr. Amit T. Kukreja
+tyb,dsa,ra,,lecture,10:00-11:00,Mon,Odd(2023-24),Ms. Rashmi R. Adatkar
+,ame-i,ds,cr10,lecture,10:00-11:00,Mon,Odd(2023-24),Mr. Divesh Singh
+tyb,dvd,svm,,lecture,11:00-12:00,Mon,Odd(2023-24),Mr. Sagar V. Mhatre
+,edc,na,cr10,lecture,11:00-12:00,Mon,Odd(2023-24),Dr. Namrata Ansari
+sya,eics,sm,,lecture,12:30-1:30,Mon,Odd(2023-24),Mr. Sandeep S. Mishra
+syb2,dld,sk,,lecture,12:30-1:30,Mon,Odd(2023-24),Dr. Sandhya D. Kadam
+,eics,sm,cr15,lecture,12:30-1:30,Mon,Odd(2023-24),Mr. Sandeep S. Mishra
+sya,am-iii,ds,,tutorial,1:30-2:30,Mon,Odd(2023-24),Mr. Divesh Singh
+,ame-i,ds,cr15,tutorial,1:30-2:30,Mon,Odd(2023-24),Mr. Divesh Singh
+sya1,edc,pu,,lecture,2:40-3:40,Mon,Odd(2023-24),Mr. Prashant B. Upadhyay
+,iloc mis,vc,cr16,lecture,9:00-10:00,Mon,Odd(2023-24),Ms. Vricha S. Chavan
+lya,bda,ak,,lecture,10:00-11:00,Thu,Odd(2023-24),Mr. Amit T. Kukreja
+syb3,dld,sk,,lecture,10:00-11:00,Thu,Odd(2023-24),Dr. Sandhya D. Kadam
+lya,mcs,pk,,lecture,11:00-12:00,Thu,Odd(2023-24),Dr. Pradnya V. Kamble
+sya1,sbl-iii,ark,,lecture,12:30-1:30,Thu,Odd(2023-24),Unknown
+tyb,dvd,svm,,lecture,12:30-1:30,Thu,Odd(2023-24),Mr. Sagar V. Mhatre
+tyb,dsa,ra,,lecture,1:30-2:30,Thu,Odd(2023-24),Ms. Rashmi R. Adatkar
+tyb,sbl-vii,rk,,lecture,2:40-3:40,Thu,Odd(2023-24),Ms. Rupali S. Kadu
+,dld,sk,cr10,lecture,2:40-3:40,Thu,Odd(2023-24),Dr. Sandhya D. Kadam
+,ent,pg,cr10,lecture,3:40-4:40,Thu,Odd(2023-24),Mrs. Priya Gupta
+lya,ccs,td,,lecture,9:00-10:00,Thu,Odd(2023-24),Ms. Tilottama P. Dhake
+syb,edc,na,,lecture,10:00-11:00,Tue,Odd(2023-24),Dr. Namrata Ansari
+syb,dld,sk,,lecture,11:00-12:00,Tue,Odd(2023-24),Dr. Sandhya D. Kadam
+,eics,sm,cr12,lecture,11:00-12:00,Tue,Odd(2023-24),Mr. Sandeep S. Mishra
+lyb4,esr,ss,,lecture,12:30-1:30,Tue,Odd(2023-24),Ms. Swati H. Shinde
+sya,am-iii,ds,,lecture,12:30-1:30,Tue,Odd(2023-24),Mr. Divesh Singh
+,ame-i,ds,cr15,lecture,12:30-1:30,Tue,Odd(2023-24),Mr. Divesh Singh
+sya,dld,sk,,lecture,1:30-2:30,Tue,Odd(2023-24),Dr. Sandhya D. Kadam
+,dld,sk,cr15,lecture,1:30-2:30,Tue,Odd(2023-24),Dr. Sandhya D. Kadam
+sya1,eics,rk,,lecture,2:40-3:40,Tue,Odd(2023-24),Ms. Rupali S. Kadu
+tya,bce,pp,,lecture,2:40-3:40,Tue,Odd(2023-24),Ms. Prahelika Pai
+lyb,mwe,kr,,lecture,9:00-10:00,Tue,Odd(2023-24),Dr. Kiran R. Rathod
+syb,edc,na,,lecture,10:00-11:00,Wed,Odd(2023-24),Dr. Namrata Ansari
+,ame-i,ds,cr10,lecture,10:00-11:00,Wed,Odd(2023-24),Mr. Divesh Singh
+syb,ent,pg,,lecture,11:00-12:00,Wed,Odd(2023-24),Mrs. Priya Gupta
+,edc,na,cr10,lecture,11:00-12:00,Wed,Odd(2023-24),Dr. Namrata Ansari
+sya1,sbl-iv+pbl,pg,,lecture,12:30-1:30,Wed,Odd(2023-24),Mrs. Priya Gupta
+syb,eics,sm,,lecture,12:30-1:30,Wed,Odd(2023-24),Mr. Sandeep S. Mishra
+syb,am-iii,ds,,lecture,1:30-2:30,Wed,Odd(2023-24),Mr. Divesh Singh
+,iloc mis,vc,cr16,lecture,9:00-10:00,Wed,Odd(2023-24),Ms. Vricha S. Chavan
+lyb3,wn,ar,lab-601,lab,10:40-11:40,Fri,Odd(2025-26),Mrs. Anuprita Rane
+tya1,ai,jk,lab-701,lab,10:40-11:40,Fri,Odd(2025-26),Dr. Jayashree V. Khanapuri
+syb4,pbl-i,pu,lab-601,lab,1:10-2:10,Fri,Odd(2025-26),Mr. Prashant B. Upadhyay
+tyb,ie,it,cr-0,lecture,3:10-4:10,Fri,Odd(2025-26),Unknown
+sya4,pbl-i,pu,lab-601,lab,8:30-9:30,Fri,Odd(2025-26),Mr. Prashant B. Upadhyay
+sya2,pbl-i,vc,lab-601,lab,10:40-11:40,Mon,Odd(2025-26),Ms. Vricha S. Chavan
+tya2,bce,pm,lab-601,lab,2:10-3:10,Mon,Odd(2025-26),Unknown
+syb1,pbl-i,vc,lab-601,lab,1:10-2:10,Thu,Odd(2025-26),Ms. Vricha S. Chavan
+tya4,ai,jk,lab-701,lab,1:10-2:10,Thu,Odd(2025-26),Dr. Jayashree V. Khanapuri
+sya3,pbl-i,td,lab-601a,lab,8:30-9:30,Thu,Odd(2025-26),Ms. Tilottama P. Dhake
+syb2,pbl-i,sd,lab-601,lab,10:40-11:40,Tue,Odd(2025-26),Dr. Sandhya S. Deshpande
+tya2,ai,jk,lab-701,lab,1:10-2:10,Tue,Odd(2025-26),Dr. Jayashree V. Khanapuri
+tyb1,bce,ap,lab-601,lab,1:10-2:10,Tue,Odd(2025-26),Dr. Anita Padhye
+tyb,ie,it,cr-0,lecture,3:10-4:10,Tue,Odd(2025-26),Unknown
+sya1,pbl-i,td,lab-601a,lab,8:30-9:30,Tue,Odd(2025-26),Ms. Tilottama P. Dhake
+syb3,pbl-i,td,lab-601,lab,8:30-9:30,Wed,Odd(2025-26),Ms. Tilottama P. Dhake
+ty,ai,jk,cr-6,lecture,8:30-9:30,Wed,Odd(2025-26),Dr. Jayashree V. Khanapuri
+tyb,ie,it,cr-0,lecture,8:30-9:30,Wed,Odd(2025-26),Unknown

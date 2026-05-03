@@ -9,7 +9,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { api } from "@/services/api";
 
 export default function TimetablePage() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Record<string, any[]>>({ SY: [], TY: [], LY: [] });
+  const [selectedYear, setSelectedYear] = useState<string>("SY");
   const [editMode, setEditMode] = useState(false);
   const [editingCell, setEditingCell] = useState<{dayIndex: number, slotIndex: number} | null>(null);
   const [editForm, setEditForm] = useState({ subject: "", faculty: "", room: "" });
@@ -22,7 +23,14 @@ export default function TimetablePage() {
   useEffect(() => {
     const saved = localStorage.getItem("timetable");
     if (saved) {
-      setData(JSON.parse(saved));
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setData({ SY: parsed, TY: [], LY: [] });
+        } else {
+          setData(parsed);
+        }
+      } catch(e) {}
       setValidationResult({ valid: true, message: "No conflicts detected." });
     }
   }, []);
@@ -30,22 +38,26 @@ export default function TimetablePage() {
   // Compute unique lists for dropdowns
   const uniqueFaculties = useMemo(() => {
     const set = new Set<string>();
-    data.forEach(d => d.slots.forEach((s: any) => { if(s.faculty) set.add(s.faculty) }));
+    Object.values(data).forEach(yearData => {
+      yearData.forEach((d: any) => d.slots.forEach((s: any) => { if(s.faculty) set.add(s.faculty) }));
+    });
     return Array.from(set).sort();
   }, [data]);
 
   const uniqueRooms = useMemo(() => {
     const set = new Set<string>();
-    data.forEach(d => d.slots.forEach((s: any) => { if(s.room) set.add(s.room) }));
+    Object.values(data).forEach(yearData => {
+      yearData.forEach((d: any) => d.slots.forEach((s: any) => { if(s.room) set.add(s.room) }));
+    });
     return Array.from(set).sort();
   }, [data]);
 
-  const saveToStorage = async (newData: any[]) => {
+  const saveToStorage = async (newData: Record<string, any[]>) => {
     setData(newData);
     localStorage.setItem("timetable", JSON.stringify(newData));
     
     // Call the validation API
-    const res = await api.validateTimetable(newData);
+    const res = await api.validateTimetable(newData[selectedYear] || []);
     setValidationResult(res);
   };
 
@@ -61,17 +73,23 @@ export default function TimetablePage() {
 
   const handleSaveEdit = () => {
     if (!editingCell) return;
-    const newData = [...data];
-    newData[editingCell.dayIndex].slots[editingCell.slotIndex] = { ...editForm };
-    saveToStorage(newData);
+    const newData = { ...data };
+    const yearData = [...(newData[selectedYear] || [])];
+    if (yearData.length > 0) {
+      yearData[editingCell.dayIndex].slots[editingCell.slotIndex] = { ...editForm };
+      newData[selectedYear] = yearData;
+      saveToStorage(newData);
+    }
     setEditingCell(null);
   };
 
   const exportCSV = () => {
-    let csv = "Day,Slot 1,Slot 2,Slot 3,Slot 4,Slot 5,Slot 6\n";
-    data.forEach((row) => {
-      const rowData = row.slots.map((s: any) => s.subject ? `"${s.subject} (${s.faculty}) - ${s.room}"` : "Free");
-      csv += `${row.day},${rowData.join(",")}\n`;
+    let csv = "Year,Day,Slot 1,Slot 2,Slot 3,Slot 4,Slot 5,Slot 6,Slot 7,Slot 8\n";
+    Object.entries(data).forEach(([year, yearData]) => {
+      yearData.forEach((row: any) => {
+        const rowData = row.slots.map((s: any) => s.subject ? `"${s.subject} (${s.faculty}) - ${s.room}"` : "Free");
+        csv += `${year},${row.day},${rowData.join(",")}\n`;
+      });
     });
     const blob = new Blob([csv]);
     const url = URL.createObjectURL(blob);
@@ -188,11 +206,28 @@ export default function TimetablePage() {
           )}
         </div>
 
-        <div className="bg-white rounded-b-2xl shadow-sm border border-gray-200 overflow-x-auto">
-          <div id="tt-export" className="p-6 min-w-[1000px] bg-white">
+        <div className="flex gap-2 mt-6">
+          {["SY", "TY", "LY"].map(year => (
+            <button
+              key={year}
+              onClick={() => setSelectedYear(year)}
+              className={`px-6 py-3 rounded-t-xl font-semibold transition-all ${
+                selectedYear === year 
+                  ? 'bg-white text-indigo-600 border-t border-l border-r border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] relative z-10 -mb-[1px]' 
+                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200 border-b border-gray-200'
+              }`}
+            >
+              {year} Timetable
+            </button>
+          ))}
+          <div className="flex-1 border-b border-gray-200"></div>
+        </div>
+
+        <div className="bg-white rounded-b-2xl rounded-tr-2xl shadow-sm border border-gray-200 overflow-x-auto relative z-0">
+          <div id="tt-export" className="p-6 min-w-[1200px] bg-white">
             <div className="text-center mb-6 hidden" id="pdf-header">
                <h2 className="text-2xl font-bold uppercase tracking-widest text-gray-900">
-                 {viewMode === "Master" ? "Official College Timetable" : `${filterValue || 'Filtered'} Timetable`}
+                 {viewMode === "Master" ? `${selectedYear} College Timetable` : `${selectedYear} Filtered Timetable`}
                </h2>
                <p className="text-gray-500 mt-1">Computer Engineering - Even Semester</p>
             </div>
@@ -200,13 +235,13 @@ export default function TimetablePage() {
               <thead>
                 <tr>
                   <th className="border-b-2 border-gray-200 p-4 text-left font-semibold text-gray-500 bg-gray-50/50 w-32">Day</th>
-                  {[1, 2, 3, 4, 5, 6].map(i => (
+                  {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
                     <th key={i} className="border-b-2 border-gray-200 p-4 text-center font-semibold text-gray-500 bg-gray-50/50">Slot {i}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {data.map((row, dayIdx) => (
+                {(data[selectedYear] || []).map((row: any, dayIdx: number) => (
                   <tr key={dayIdx} className="group">
                     <td className="border-b border-gray-100 p-4 font-medium text-gray-900 bg-gray-50/30">
                       {row.day}
