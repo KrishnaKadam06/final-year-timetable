@@ -12,17 +12,22 @@ export default function GeneratePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    academicYear: "2024-2025",
-    semester: "Even",
+    academicYear: "2023-2024",
+    semester: "Odd",
     department: "Computer Engineering",
   });
 
   const generate = async () => {
     setLoading(true);
-    const result = await api.generateTimetable(formData);
-    localStorage.setItem("timetable", JSON.stringify(result));
-    setLoading(false);
-    router.push("/timetable");
+    try {
+      const result = await api.generateTimetable(formData);
+      localStorage.setItem("timetable", JSON.stringify(result));
+      setLoading(false);
+      router.push("/timetable");
+    } catch (error: any) {
+      alert(error.message || "Failed to generate timetable. The AI found the constraints to be mathematically infeasible.");
+      setLoading(false);
+    }
   };
 
   return (

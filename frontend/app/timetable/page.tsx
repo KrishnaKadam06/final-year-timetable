@@ -12,9 +12,9 @@ export default function TimetablePage() {
   const [data, setData] = useState<Record<string, any[]>>({ SY: [], TY: [], LY: [] });
   const [selectedYear, setSelectedYear] = useState<string>("SY");
   const [editMode, setEditMode] = useState(false);
-  const [editingCell, setEditingCell] = useState<{dayIndex: number, slotIndex: number} | null>(null);
+  const [editingCell, setEditingCell] = useState<{ dayIndex: number, slotIndex: number } | null>(null);
   const [editForm, setEditForm] = useState({ subject: "", faculty: "", room: "" });
-  const [validationResult, setValidationResult] = useState<{valid: boolean, message: string} | null>(null);
+  const [validationResult, setValidationResult] = useState<{ valid: boolean, message: string } | null>(null);
 
   // Filters
   const [viewMode, setViewMode] = useState<"Master" | "Faculty" | "Room">("Master");
@@ -30,7 +30,7 @@ export default function TimetablePage() {
         } else {
           setData(parsed);
         }
-      } catch(e) {}
+      } catch (e) { }
       setValidationResult({ valid: true, message: "No conflicts detected." });
     }
   }, []);
@@ -39,7 +39,7 @@ export default function TimetablePage() {
   const uniqueFaculties = useMemo(() => {
     const set = new Set<string>();
     Object.values(data).forEach(yearData => {
-      yearData.forEach((d: any) => d.slots.forEach((s: any) => { if(s.faculty) set.add(s.faculty) }));
+      yearData.forEach((d: any) => d.slots.forEach((s: any) => { if (s.faculty) set.add(s.faculty) }));
     });
     return Array.from(set).sort();
   }, [data]);
@@ -47,7 +47,7 @@ export default function TimetablePage() {
   const uniqueRooms = useMemo(() => {
     const set = new Set<string>();
     Object.values(data).forEach(yearData => {
-      yearData.forEach((d: any) => d.slots.forEach((s: any) => { if(s.room) set.add(s.room) }));
+      yearData.forEach((d: any) => d.slots.forEach((s: any) => { if (s.room) set.add(s.room) }));
     });
     return Array.from(set).sort();
   }, [data]);
@@ -55,7 +55,7 @@ export default function TimetablePage() {
   const saveToStorage = async (newData: Record<string, any[]>) => {
     setData(newData);
     localStorage.setItem("timetable", JSON.stringify(newData));
-    
+
     // Call the validation API
     const res = await api.validateTimetable(newData[selectedYear] || []);
     setValidationResult(res);
@@ -64,10 +64,10 @@ export default function TimetablePage() {
   const handleCellClick = (dayIndex: number, slotIndex: number, slotData: any) => {
     if (!editMode) return;
     setEditingCell({ dayIndex, slotIndex });
-    setEditForm({ 
-      subject: slotData.subject, 
-      faculty: slotData.faculty, 
-      room: slotData.room 
+    setEditForm({
+      subject: slotData.subject,
+      faculty: slotData.faculty,
+      room: slotData.room
     });
   };
 
@@ -102,7 +102,7 @@ export default function TimetablePage() {
   const exportPDF = async () => {
     const element = document.getElementById("tt-export");
     if (!element) return;
-    
+
     // Briefly unhide header for PDF
     const header = document.getElementById("pdf-header");
     if (header) header.style.display = "block";
@@ -110,15 +110,15 @@ export default function TimetablePage() {
     const canvas = await html2canvas(element, { scale: 2 });
     const img = canvas.toDataURL("image/png");
     const pdf = new jsPDF("l", "mm", "a4");
-    
+
     // A4 Landscape is 297 x 210 mm
     pdf.addImage(img, "PNG", 10, 10, 277, 0);
-    
+
     let filename = "timetable.pdf";
     if (viewMode !== "Master" && filterValue) {
       filename = `timetable_${filterValue.replace(/\s+/g, '_')}.pdf`;
     }
-    
+
     pdf.save(filename);
 
     if (header) header.style.display = "none";
@@ -134,10 +134,10 @@ export default function TimetablePage() {
             <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Master Timetable</h1>
             <p className="text-gray-500 mt-1">Review, edit, filter, and export the schedule.</p>
           </div>
-          
+
           <div className="flex gap-3">
-            <button 
-              onClick={() => setEditMode(!editMode)} 
+            <button
+              onClick={() => setEditMode(!editMode)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-colors ${editMode ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'}`}
             >
               <Edit3 className="h-4 w-4" />
@@ -155,7 +155,7 @@ export default function TimetablePage() {
         </header>
 
         {validationResult && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${validationResult.valid ? 'bg-emerald-50 border-emerald-100 text-emerald-800' : 'bg-red-50 border-red-100 text-red-800'}`}
@@ -170,7 +170,7 @@ export default function TimetablePage() {
             <Filter className="h-4 w-4" />
             Filter View:
           </div>
-          <select 
+          <select
             className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
             value={viewMode}
             onChange={(e) => {
@@ -184,7 +184,7 @@ export default function TimetablePage() {
           </select>
 
           {viewMode === "Faculty" && (
-            <select 
+            <select
               className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
@@ -195,7 +195,7 @@ export default function TimetablePage() {
           )}
 
           {viewMode === "Room" && (
-            <select 
+            <select
               className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
@@ -211,11 +211,10 @@ export default function TimetablePage() {
             <button
               key={year}
               onClick={() => setSelectedYear(year)}
-              className={`px-6 py-3 rounded-t-xl font-semibold transition-all ${
-                selectedYear === year 
-                  ? 'bg-white text-indigo-600 border-t border-l border-r border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] relative z-10 -mb-[1px]' 
+              className={`px-6 py-3 rounded-t-xl font-semibold transition-all ${selectedYear === year
+                  ? 'bg-white text-indigo-600 border-t border-l border-r border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] relative z-10 -mb-[1px]'
                   : 'bg-gray-100 text-gray-500 hover:bg-gray-200 border-b border-gray-200'
-              }`}
+                }`}
             >
               {year} Timetable
             </button>
@@ -226,10 +225,10 @@ export default function TimetablePage() {
         <div className="bg-white rounded-b-2xl rounded-tr-2xl shadow-sm border border-gray-200 overflow-x-auto relative z-0">
           <div id="tt-export" className="p-6 min-w-[1200px] bg-white">
             <div className="text-center mb-6 hidden" id="pdf-header">
-               <h2 className="text-2xl font-bold uppercase tracking-widest text-gray-900">
-                 {viewMode === "Master" ? `${selectedYear} College Timetable` : `${selectedYear} Filtered Timetable`}
-               </h2>
-               <p className="text-gray-500 mt-1">Computer Engineering - Even Semester</p>
+              <h2 className="text-2xl font-bold uppercase tracking-widest text-gray-900">
+                {viewMode === "Master" ? `${selectedYear} College Timetable` : `${selectedYear} Filtered Timetable`}
+              </h2>
+              <p className="text-gray-500 mt-1">Computer Engineering - Even Semester</p>
             </div>
             <table className="w-full border-collapse">
               <thead>
@@ -255,17 +254,16 @@ export default function TimetablePage() {
                       let isFilteredOut = false;
                       if (viewMode === "Faculty" && filterValue && slot.faculty !== filterValue) isFilteredOut = true;
                       if (viewMode === "Room" && filterValue && slot.room !== filterValue) isFilteredOut = true;
-                      
+
                       // Breaks and Free slots are never filtered out
                       if (isSpecial) isFilteredOut = false;
 
                       return (
-                        <td 
-                          key={slotIdx} 
+                        <td
+                          key={slotIdx}
                           onClick={() => handleCellClick(dayIdx, slotIdx, slot)}
-                          className={`border-b border-l border-gray-100 p-3 align-top transition-colors ${
-                            isEditing && !isSpecial ? 'cursor-pointer hover:bg-indigo-50/50 ring-inset hover:ring-2 hover:ring-indigo-300' : ''
-                          } ${isSpecial ? 'bg-gray-50/50 text-center align-middle' : ''} ${isFilteredOut && hasContent ? 'opacity-20 grayscale bg-gray-50/50' : ''}`}
+                          className={`border-b border-l border-gray-100 p-3 align-top transition-colors ${isEditing && !isSpecial ? 'cursor-pointer hover:bg-indigo-50/50 ring-inset hover:ring-2 hover:ring-indigo-300' : ''
+                            } ${isSpecial ? 'bg-gray-50/50 text-center align-middle' : ''} ${isFilteredOut && hasContent ? 'opacity-20 grayscale bg-gray-50/50' : ''}`}
                         >
                           {isSpecial ? (
                             <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">{slot.subject}</span>
@@ -292,7 +290,7 @@ export default function TimetablePage() {
         <AnimatePresence>
           {editingCell && (
             <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
@@ -304,30 +302,30 @@ export default function TimetablePage() {
                     <X className="h-5 w-5" />
                   </button>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                    <input 
+                    <input
                       className="w-full border border-gray-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                       value={editForm.subject}
-                      onChange={e => setEditForm({...editForm, subject: e.target.value})}
+                      onChange={e => setEditForm({ ...editForm, subject: e.target.value })}
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Faculty</label>
-                    <input 
+                    <input
                       className="w-full border border-gray-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                       value={editForm.faculty}
-                      onChange={e => setEditForm({...editForm, faculty: e.target.value})}
+                      onChange={e => setEditForm({ ...editForm, faculty: e.target.value })}
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Room / Lab</label>
-                    <input 
+                    <input
                       className="w-full border border-gray-200 rounded-xl px-3 py-2 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                       value={editForm.room}
-                      onChange={e => setEditForm({...editForm, room: e.target.value})}
+                      onChange={e => setEditForm({ ...editForm, room: e.target.value })}
                     />
                   </div>
                 </div>

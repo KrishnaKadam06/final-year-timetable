@@ -1,14 +1,18 @@
 export const api = {
   login: async (username: string, password: string) => {
-    // TODO: Replace with real FastAPI call when ready
-    // e.g. const res = await fetch("http://localhost:8000/auth/login", { ... })
-    
-    // MOCK:
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    if (username === "admin" && password === "admin") {
-      return { success: true, role: "admin", token: "mock_jwt_token_123" };
+    try {
+      const response = await fetch("http://127.0.0.1:8000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Login failed:", error);
+      return { success: false, error: "Network error" };
     }
-    return { success: false, error: "Invalid credentials" };
   },
 
   generateTimetable: async (params: { academicYear: string; semester: string; department: string }) => {
@@ -81,26 +85,34 @@ export const api = {
   },
 
   validateTimetable: async (timetable: any[]) => {
-    // TODO: Replace with real FastAPI call to validation AI
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // MOCK VALIDATION: Example conflict for demo
-    for (let d = 0; d < timetable.length; d++) {
-      for (let s = 0; s < timetable[d].slots.length; s++) {
-        const slot = timetable[d].slots[s];
-        if (slot.faculty === "Dr. Smith" && d === 0 && s === 0) {
-          return { valid: false, message: "Conflict: Dr. Smith is double-booked." };
-        }
-      }
+    try {
+      const response = await fetch("http://127.0.0.1:8000/validate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ timetable }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Validation failed:", error);
+      return { valid: false, message: "Network error during validation" };
     }
-    return { valid: true, message: "No conflicts detected." };
   },
 
   uploadData: async (category: string, parsedData: any[]) => {
-    // TODO: Replace with real FastAPI call
-    // fetch(`http://localhost:8000/upload/${category}`, { method: 'POST', body: JSON.stringify(parsedData) })
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return { success: true, count: parsedData.length };
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/upload/${category}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(parsedData),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Upload failed:", error);
+      return { success: false, error: "Network error during upload" };
+    }
   }
 };

@@ -3,9 +3,9 @@ import pandas as pd
 import os
 
 def setup_relational_db():
-    # 💥 THE NUCLEAR OPTION: Hardcoding your exact computer path
-    MAIN_DIR = r"c:\Users\Savir\OneDrive\Desktop\Semwise\SEM 6\final year project material"
-    output_dir = os.path.join(MAIN_DIR, "output_db")
+    # Dynamically resolve current directory
+    MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(MAIN_DIR, "final_data")
     db_path = os.path.join(MAIN_DIR, 'university_timetable.db')
     
     conn = sqlite3.connect(db_path)

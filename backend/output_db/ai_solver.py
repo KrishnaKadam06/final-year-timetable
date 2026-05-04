@@ -6,9 +6,8 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 def fetch_data(target_term):
-    # Setup the PostgreSQL connection via SQLAlchemy
-    # FORMAT: postgresql://username:password@localhost:5432/database_name
-    engine = create_engine('postgresql://postgres:superuserbitch@localhost:5432/university_timetable')
+    # Setup the SQLite connection via SQLAlchemy to avoid requiring a local Postgres server
+    engine = create_engine('sqlite:///university_timetable.db')
         
     print(f"👉 Filtering workload for Term: {target_term}")
     
@@ -249,5 +248,5 @@ def build_schedule(target_term):
         return None
 
 if __name__ == "__main__":
-    test_term = "Odd(2023-24)"  # Define it here!
+    test_term = "Odd(2024-25)"  # Define it here!
     build_schedule(test_term)
