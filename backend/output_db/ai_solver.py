@@ -37,12 +37,14 @@ def export_to_excel(solver, schedule, days_list, slots_list, subject_year_map, f
             data.append({'Year': year, 'Day': day, 'Slot': slot, 'Class': class_info})
             
     # 2. Convert to Pandas DataFrame
-    df = pd.DataFrame(data)
+    # Always define columns so that if data is empty, it doesn't crash with KeyError: 'Year'
+    df = pd.DataFrame(data, columns=['Year', 'Day', 'Slot', 'Class'])
     
     # 3. Use ExcelWriter to generate multiple sheets in one file
     with pd.ExcelWriter(filename) as writer:
-        # We explicitly target your three year batches
-        for year in ['SY', 'TY', 'LY']:
+        sheets_added = False
+        # We explicitly target your three year batches plus UNKNOWN
+        for year in ['SY', 'TY', 'LY', 'UNKNOWN']:
             # Filter the dataframe for only this specific year
             df_year = df[df['Year'] == year]
             
@@ -70,8 +72,12 @@ def export_to_excel(solver, schedule, days_list, slots_list, subject_year_map, f
             
             # Save to its designated tab
             pivot_df.to_excel(writer, sheet_name=f"{year} Timetable")
+            sheets_added = True
             
-    print(f"✅ Multi-sheet Excel file successfully saved as: {filename} (Tabs: SY, TY, LY)")
+        if not sheets_added:
+            pd.DataFrame({'Message': ['No valid schedule data found']}).to_excel(writer, sheet_name="Empty")
+            
+    print(f"✅ Multi-sheet Excel file successfully saved as: {filename}")
 
 def build_schedule(target_term):
     print("1. Fetching data from database...")

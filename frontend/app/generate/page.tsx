@@ -44,7 +44,7 @@ export default function GeneratePage() {
         </header>
 
         <div className="max-w-3xl">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
@@ -59,12 +59,14 @@ export default function GeneratePage() {
 
             <div className="p-8 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* academic Dropdown */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Academic Year</label>
-                  <select 
+                  <select
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                     value={formData.academicYear}
-                    onChange={(e) => setFormData({...formData, academicYear: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, academicYear: e.target.value })}
                   >
                     <option>2023-2024</option>
                     <option>2024-2025</option>
@@ -72,12 +74,13 @@ export default function GeneratePage() {
                   </select>
                 </div>
 
+                {/* Semester Dropdown */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Semester</label>
-                  <select 
+                  <select
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                     value={formData.semester}
-                    onChange={(e) => setFormData({...formData, semester: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, semester: e.target.value })}
                   >
                     <option>Odd</option>
                     <option>Even</option>
@@ -86,10 +89,10 @@ export default function GeneratePage() {
 
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">Department</label>
-                  <select 
+                  <select
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                     value={formData.department}
-                    onChange={(e) => setFormData({...formData, department: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, department: e.target.value })}
                   >
                     <option>Computer Engineering</option>
                     <option>Information Technology</option>
