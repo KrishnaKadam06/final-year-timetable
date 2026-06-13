@@ -1,111 +1,197 @@
-batch_or_div,subject_code,faculty_initials,assignment_type,hours_per_week
-CCS,TD,Lab-605,theory,2
-ESR,SS,Lab-703,theory,2
-LY,WN,AR,theory,1
-LYA1,AI,SK,practical,1
-LYA1,MWE,KR,practical,1
-LYA1,NNDL,PH,practical,1
-LYA2,BDA,RA,practical,1
-LYA2,CCS,TD,practical,1
-LYA2,MWE,KR,practical,1
-LYA3,BDA,AK,practical,1
-LYA3,CCS,TD,practical,1
-LYA3,MWE,KR,practical,1
-LYA3,NNDL,PH,practical,1
-LYB1,AI,SK,practical,1
-LYB1,CCS,TD,practical,1
-LYB1,MWE,PK,practical,1
-LYB2,ESR,SS,practical,1
-LYB2,MWE,PK,practical,1
-LYB2,WN,AR,practical,1
-LYB3,ESR,SS,practical,1
-LYB3,MWE,KR,practical,1
-LYB3,WN,AR,practical,1
-NNDL,PH,Lab-603,theory,2
-SYA1,DLD,MJ,practical,1
-SYA1,EDLC,PU,practical,1
-SYA1,EICS,VC,practical,1
-SYA1,PBL-I,TD,practical,1
-SYA1,SAT-VII,AR,practical,1
-SYA2,DLD,MJ,practical,1
-SYA2,EDLC,PU,practical,1
-SYA2,EICS,VC,practical,1
-SYA2,PBL-I,VC,practical,1
-SYA2,SAT-VII,PRH,practical,1
-SYA3,DLD,SD,practical,1
-SYA3,EDLC,SP,practical,1
-SYA3,EICS,VC,practical,1
-SYA3,PBL-I,TD,practical,1
-SYA3,SAT-VII,PRH,practical,1
-SYA4,DLD,EP,practical,1
-SYA4,EDLC,SP,practical,1
-SYA4,EICS,HA,practical,1
-SYA4,PBL-I,PU,practical,1
-SYA4,SAT-VII,AK,practical,1
-SYB1,DLD,EP,practical,1
-SYB1,EDLC,SP,practical,1
-SYB1,EICS,VC,practical,1
-SYB1,PBL-I,VC,practical,1
-SYB1,SAT-VII,AK,practical,1
-SYB2,DLD,SD,practical,1
-SYB2,EDLC,SP,practical,1
-SYB2,EICS,HA,practical,1
-SYB2,PBL-I,SD,practical,1
-SYB2,SAT-VII,AK,practical,1
-SYB3,DLD,SD,practical,1
-SYB3,EDLC,PU,practical,1
-SYB3,EICS,HA,practical,1
-SYB3,PBL-I,TD,practical,1
-SYB3,SAT-VII,AK,practical,1
-SYB4,DLD,MJ,practical,1
-SYB4,EDLC,NA,practical,1
-SYB4,EICS,VC,practical,1
-SYB4,PBL-I,PU,practical,1
-TYA1,AI,JK,practical,1
-TYA1,BCE,VG,practical,1
-TYA1,DSA,RA,practical,1
-TYA1,DTSP,PRH,practical,1
-TYA1,DVD,MP,practical,1
-TYA1,PBL-II,SS,practical,1
-TYA2,AI,JK,practical,1
-TYA2,BCE,PM,practical,1
-TYA2,DSA,RS,practical,1
-TYA2,DTSP,RK,practical,1
-TYA2,DVD,MP,practical,1
-TYA2,PBL-II,SS,practical,1
-TYA3,AI,SK,practical,1
-TYA3,BCE,RAK,practical,1
-TYA3,DSA,RS,practical,1
-TYA3,DTSP,PRH,practical,1
-TYA3,DVD,SVM,practical,1
-TYA3,PBL-II,SK,practical,1
-TYA4,AI,JK,practical,1
-TYA4,BCE,AP,practical,1
-TYA4,DSA,RS,practical,1
-TYA4,DTSP,PRH,practical,1
-TYA4,DVD,MP,practical,1
-TYA4,PBL-II,SS,practical,1
-TYB,ST,SM,theory,2
-TYB1,BCE,AP,practical,1
-TYB1,DSA,RA,practical,1
-TYB1,DTSP,RK,practical,1
-TYB1,DVD,MP,practical,1
-TYB1,PBL-II,SK,practical,1
-TYB1,VLSI,SVM,practical,1
-TYB2,BCE,AP,practical,1
-TYB2,DSA,RA,practical,1
-TYB2,DTSP,RK,practical,1
-TYB2,DVD,MP,practical,1
-TYB2,ICC,PK,practical,1
-TYB2,PBL-II,SVM,practical,1
-TYB3,BCE,VG,practical,1
-TYB3,DSA,RA,practical,1
-TYB3,DTSP,PRH,practical,1
-TYB3,DVD,SVM,practical,1
-TYB3,ICC,PK,practical,1
-TYB3,PBL-II,SS,practical,1
-TYB3+B4,ST,SM,practical,1
-TYB4,DTSP,RK,practical,1
-TYB4,DVD,MP,practical,1
-TYB4,PBL-II,MP,practical,1
-TYB4,VLSI,SVM,practical,1
+batch_or_div,subject_code,faculty_initials,room_code,assignment_type,hours_per_week
+CCS,TD,CR-8,CR8,theory,1
+CCS,TD,Lab-605,605A,theory,1
+CCS,TD,Lab-605,605B,theory,1
+ESR,SS,Lab-703,703,theory,2
+ILOC:LY,MIS,VC,CR-1,theory,3
+ILOC:LY,PLCM,TP,AUDI,theory,3
+LY,AI,SK,CR-13,theory,2
+LY,AI,SK,CR-8,theory,1
+LY,BDA,AK,CR-9,theory,3
+LY,CCS,TD,CR-8,theory,1
+LY,ESR,SS,CR-7,theory,1
+LY,NNDL,PH,CR-7,theory,1
+LY,WN,AR,CR-13,theory,1
+LY,WN,AR,CR-9,theory,1
+LY,WN,AR,Lab-701,theory,1
+LYA,BDA,AK,CR-6,theory,1
+LYA,MCS,PK,CR-13,theory,1
+LYA,MCS,PK,CR-8,theory,2
+LYA,MWE,KR,CR-16,theory,1
+LYA,MWE,KR,CR-8,theory,3
+LYA & B,CCS,TD,CR-7,theory,1
+LYA1,AI,SK,Lab-602,practical,2
+LYA1,MWE,KR,Lab-604 B,practical,2
+LYA1,NNDL,PH,Lab-603,practical,2
+LYA2,BDA,RA,Lab-602,practical,2
+LYA2,CCS,TD,Lab-605 B,practical,2
+LYA2,MWE,KR,Lab-604 B,practical,2
+LYA3,BDA,AK,Lab-602,practical,2
+LYA3,CCS,TD,Lab-605 B,practical,2
+LYA3,MWE,KR,Lab-604 B,practical,2
+LYA3,NNDL,PH,Lab-603,practical,2
+LYB,MCS,PK,CR-6,theory,1
+LYB,MCS,PK,CR-7,theory,2
+LYB,MCS,PK,CR-9,theory,1
+LYB,MWE,KR,CR-1,theory,1
+LYB,MWE,KR,CR-7,theory,1
+LYB,MWE,KR,CR-8,theory,1
+LYB,MWE,KR,CR-9,theory,1
+LYB1,AI,SK,Lab-701,practical,2
+LYB1,CCS,TD,Lab-605 B,practical,2
+LYB1,MWE,PK,Lab-604 A,practical,2
+LYB2,ESR,SS,Lab-605 A,practical,2
+LYB2,MWE,PK,Lab-604 A,practical,2
+LYB2,WN,AR,Lab-605 A,practical,2
+LYB3,ESR,SS,Lab-605 A,practical,2
+LYB3,MWE,KR,Lab-604 B,practical,2
+LYB3,WN,AR,Lab-601 A,practical,2
+NNDL,PH,Lab-603,603,theory,2
+SYA,AME II,PJ,CR 8,theory,1
+SYA,AME-II,PJ,CR 8,theory,1
+SYA,AME-II,PJ,CR 9,theory,1
+SYA,AME-II,PJ,CR-7,theory,1
+SYA,AME-II(TUT),TA1,PJ,theory,1
+SYA,AME-II(TUT),TA2,PJ,theory,1
+SYA,AME-II(TUT),TA3,PJ,theory,1
+SYA,DLD,DD,CR-7,theory,1
+SYA,DLD,MJ,CR 7,theory,1
+SYA,DLD,MJ,CR 8,theory,1
+SYA,DLD,MJ,CR 9,theory,1
+SYA,EDLC,PU,CR 7,theory,2
+SYA,EDLC,PU,CR 9,theory,1
+SYA,EDLC,PU,CR-8,theory,1
+SYA,EICS,HA,CR 7,theory,1
+SYA,EICS,HA,CR 8,theory,2
+SYA,EICS,HA,CR-7,theory,1
+SYA,ENT,SP,CR 7,theory,3
+SYA,ENT,SP,CR-8,theory,1
+SYA,PBL I,PU,CR 8,theory,1
+SYA1,DLD,MJ,Lab-602,practical,2
+SYA1,EDLC,PU,Lab-601 B,practical,2
+SYA1,EICS,VC,Lab-603,practical,2
+SYA1,PBL-I,TD,Lab-601A,practical,2
+SYA1,SAT-VII,AR,Lab-701,practical,2
+SYA2,DLD,MJ,Lab-602,practical,2
+SYA2,EDLC,PU,Lab-601 B,practical,2
+SYA2,EICS,VC,Lab-603,practical,2
+SYA2,PBL-I,VC,Lab-601 A,practical,2
+SYA2,SAT-VII,PRH,Lab-703,practical,2
+SYA3,DLD,SD,Lab-602,practical,2
+SYA3,EDLC,SP,Lab-601 B,practical,2
+SYA3,EICS,VC,Lab-603,practical,2
+SYA3,PBL-I,TD,Lab-601A,practical,2
+SYA3,SAT-VII,PRH,Lab-703,practical,2
+SYA4,DLD,EP,Lab-602,practical,2
+SYA4,EDLC,SP,Lab-601 B,practical,2
+SYA4,EICS,HA,Lab-603,practical,2
+SYA4,PBL-I,PU,Lab-601 A,practical,2
+SYA4,SAT-VII,AK,Lab-701,practical,2
+SYB,AME-II,PJ,CR 9,theory,3
+SYB,AME-II,PJ,CR-8,theory,1
+SYB,AME-II(TUT),TB1,PJ,theory,1
+SYB,AME-II(TUT),TB2,PJ,theory,1
+SYB,AME-II(TUT),TB3,PJ,theory,1
+SYB,DLD,MJ,CR 8,theory,1
+SYB,DLD,MJ,CR 9,theory,2
+SYB,DLD,VS,CR-8,theory,1
+SYB,EDLC,NA,CR 8,theory,1
+SYB,EDLC,NA,CR 9,theory,2
+SYB,EDLC,NA,CR-6,theory,1
+SYB,EICS,HA,CR 8,theory,3
+SYB,ENT,SP,CR 8,theory,1
+SYB,ENT,SP,CR 9,theory,1
+SYB,ENT,SP,CR-8,theory,2
+SYB,PBL-I,MJ,CR 8,theory,1
+SYB1,DLD,EP,Lab-602,practical,2
+SYB1,EDLC,SP,Lab-601 B,practical,2
+SYB1,EICS,VC,Lab-603,practical,2
+SYB1,PBL-I,VC,Lab-601 A,practical,2
+SYB1,SAT-VII,AK,Lab-701,practical,2
+SYB2,DLD,SD,Lab-602,practical,2
+SYB2,EDLC,SP,Lab-601 B,practical,2
+SYB2,EICS,HA,Lab-603,practical,2
+SYB2,PBL-I,SD,Lab-601 A,practical,2
+SYB2,SAT-VII,AK,Lab-703,practical,2
+SYB3,DLD,SD,Lab-602,practical,2
+SYB3,EDLC,PU,Lab-601 B,practical,2
+SYB3,EICS,HA,Lab-603,practical,2
+SYB3,PBL-I,TD,Lab-601 A,practical,2
+SYB3,SAT-VII,AK,Lab-701,practical,2
+SYB4,DLD,MJ,Lab-602,practical,2
+SYB4,EDLC,NA,Lab-601 B,practical,2
+SYB4,EICS,VC,Lab-603,practical,2
+SYB4,PBL-I,PU,Lab-601 A,practical,2
+TYA,BCE,PM,CR-6,theory,2
+TYA,CCN,RS,CR-6,theory,3
+TYA,CCN,RS,CR-7,theory,1
+TYA,DSA,RA,CR-6,theory,4
+TYA,DTSP,PRH,CR-6,theory,4
+TYA,DVD,SVM,CR-1,theory,1
+TYA,DVD,SVM,CR-6,theory,3
+TYA,PBL-II,SS,CR-6,theory,1
+TYA,SAT-X,AK,CR-6,theory,2
+TYA1,AI,JK,Lab-701,practical,2
+TYA1,BCE,VG,Lab-602,practical,2
+TYA1,DSA,RA,Lab-605 A,practical,2
+TYA1,DTSP,PRH,Lab-703,practical,2
+TYA1,DVD,MP,Lab-604 A,practical,2
+TYA1,PBL-II,SS,Lab-603,practical,2
+TYA2,AI,JK,Lab-701,practical,2
+TYA2,BCE,PM,Lab-601 A,practical,2
+TYA2,DSA,RS,Lab-605 B,practical,2
+TYA2,DTSP,RK,Lab-703,practical,2
+TYA2,DVD,MP,Lab-604 A,practical,2
+TYA2,PBL-II,SS,Lab-703,practical,2
+TYA3,AI,SK,Lab-701,practical,2
+TYA3,BCE,RAK,Lab-701,practical,2
+TYA3,DSA,RS,Lab-605 A,practical,2
+TYA3,DTSP,PRH,Lab-703,practical,2
+TYA3,DVD,SVM,Lab-604 A,practical,2
+TYA3,PBL-II,SK,Lab-601 B,practical,2
+TYA4,AI,JK,Lab-701,practical,2
+TYA4,BCE,AP,Lab-605 B,practical,2
+TYA4,DSA,RS,Lab-605 A,practical,2
+TYA4,DTSP,PRH,Lab-703,practical,2
+TYA4,DVD,MP,Lab-604 A,practical,2
+TYA4,PBL-II,SS,Lab-605 B,practical,2
+TYB,BCE,RAK,CR-6,theory,1
+TYB,BCE,RAK,CR-7,theory,1
+TYB,CCN,RS,CR-7,theory,3
+TYB,CCS,RS,CR-15,theory,1
+TYB,DSA,RA,CR-1,theory,1
+TYB,DSA,RA,CR-7,theory,3
+TYB,DTSP,RK,CR-6,theory,3
+TYB,DTSP,RK,CR-7,theory,1
+TYB,DVD,MP,CR-1,theory,1
+TYB,DVD,MP,CR-6,theory,1
+TYB,DVD,MP,CR-7,theory,2
+TYB,PBL-II,SS,CR-7,theory,1
+TYB,SAT-X,RK,CR-6,theory,1
+TYB,SAT-X,RK,CR-7,theory,1
+TYB,ST,SM,CR-6,theory,2
+TYB,ST,SM,Lab-605,theory,2
+TYB1,BCE,AP,Lab-601 A,practical,2
+TYB1,DSA,RA,Lab-605 A,practical,2
+TYB1,DTSP,RK,Lab-703,practical,2
+TYB1,DVD,MP,Lab-604 B,practical,2
+TYB1,PBL-II,SK,Lab-703,practical,2
+TYB1,VLSI,SVM,Lab-604 A,practical,2
+TYB2,BCE,AP,Lab-605 A,practical,2
+TYB2,DSA,RA,Lab-605 A,practical,2
+TYB2,DTSP,RK,Lab-703,practical,2
+TYB2,DVD,MP,Lab-604 B,practical,2
+TYB2,ICC,PK,Lab-10,practical,2
+TYB2,PBL-II,SVM,Lab-601 B,practical,2
+TYB3,BCE,VG,Lab-602,practical,2
+TYB3,DSA,RA,Lab-605 A,practical,2
+TYB3,DTSP,PRH,Lab-703,practical,2
+TYB3,DVD,SVM,Lab-602,practical,2
+TYB3,ICC,PK,Lab-L10,practical,2
+TYB3,PBL-II,SS,Lab-603,practical,2
+TYB3+B4,ST,SM,Lab-605 B,practical,2
+TYB4,DTSP,RK,Lab-703,practical,2
+TYB4,DVD,MP,Lab-604 B,practical,2
+TYB4,PBL-II,MP,Lab-605 B,practical,2
+TYB4,VLSI,SVM,Lab-602,practical,2
+WN,NV,AUDI,AUDI,theory,1
