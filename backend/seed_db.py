@@ -1,62 +1,52 @@
 import pandas as pd
 import os
 from app.database import engine, SessionLocal
-from app.models import Base, Faculty, Subject, Batch, SubjectFacultyAssignment
+from app.models import Base, Faculty, Subject, Batch, SubjectFacultyAssignment, Room
 
 print("🔄 Initializing Database...")
-# This automatically creates all tables defined in models.py if they don't exist
 Base.metadata.create_all(bind=engine)
 
-# Path to the CSV we just created
 CSV_PATH = "EXTC_TT/Odd(2025-26)/cleaned_data/extracted_workloads.csv"
+ROOMS_CSV = "EXTC_TT/Odd(2025-26)/cleaned_data/extracted_rooms.csv"
 
-if not os.path.exists(CSV_PATH):
-    print(f"❌ Error: Cannot find {CSV_PATH}. Make sure you are running this from the 'backend' folder.")
-    exit()
-
-print("📂 Reading CSV data...")
 df = pd.read_csv(CSV_PATH)
+df_rooms = pd.read_csv(ROOMS_CSV)
 db = SessionLocal()
 
 try:
-    print("⏳ Populating Master Tables (Faculty, Subjects, Batches)...")
+    print("⏳ Populating Master Tables...")
     
-    # 1. Insert Unique Faculty (Skipping the bugged "Lab-..." entries)
-    faculties = df['faculty_initials'].dropna().unique()
-    for f in faculties:
-        if str(f).startswith("Lab-"): 
-            continue
-        if not db.query(Faculty).filter_by(faculty_initials=f).first():
+    # 1. Insert Rooms (NEW)
+    for r in df_rooms['room_code'].dropna().unique():
+        if not db.query(Room).filter_by(room_code=str(r)).first():
+            db.add(Room(room_code=str(r), room_name=str(r), room_type="lab" if "Lab" in str(r) else "theory"))
+
+    # 2. Insert Faculty
+    for f in df['faculty_initials'].dropna().unique():
+        if not str(f).startswith("Lab-") and not db.query(Faculty).filter_by(faculty_initials=f).first():
             db.add(Faculty(faculty_initials=f, faculty_name=f"Prof. {f}"))
             
-    # 2. Insert Unique Subjects
-    subjects = df['subject_code'].dropna().unique()
-    for s in subjects:
+    # 3. Insert Subjects
+    for s in df['subject_code'].dropna().unique():
         if not db.query(Subject).filter_by(subject_code=s).first():
             db.add(Subject(subject_code=s, subject_name=s))
             
-    # 3. Insert Unique Batches
-    batches = df['batch_or_div'].dropna().unique()
-    for b in batches:
-        # Filter out the subjects that accidentally got read as batches
-        if b not in ['CCS', 'ESR', 'NNDL']: 
-            if not db.query(Batch).filter_by(batch_name=b).first():
-                db.add(Batch(batch_name=b))
+    # 4. Insert Batches
+    for b in df['batch_or_div'].dropna().unique():
+        if b not in ['CCS', 'ESR', 'NNDL'] and not db.query(Batch).filter_by(batch_name=b).first():
+            db.add(Batch(batch_name=b))
 
     db.commit()
 
     print("⏳ Populating Workload Assignments...")
+    db.query(SubjectFacultyAssignment).delete() # Clear old data
     
-    # Clear old assignments to prevent duplicates if you run this twice
-    db.query(SubjectFacultyAssignment).delete()
-    
-    # 4. Insert Assignments
+    # 5. Insert Assignments (NOW WITH ROOM CODE)
     assignments_added = 0
     for _, row in df.iterrows():
         fac = str(row['faculty_initials'])
         batch = str(row['batch_or_div'])
         
-        # Skip the bugged rows
         if fac.startswith("Lab-") or batch in ['CCS', 'ESR', 'NNDL']: 
             continue
 
@@ -64,13 +54,14 @@ try:
             subject_code=row['subject_code'],
             faculty_initials=fac,
             batch_name=batch,
+            room_code=str(row['room_code']),  # <--- THE FIX IS HERE
             assignment_type=row['assignment_type'],
-            hours_per_week=row['hours_per_week']
+            hours_per_week=row['hours_per_week'] # <--- This will now correctly say 2 for labs!
         ))
         assignments_added += 1
     
     db.commit()
-    print(f"🎉 BOOM! Successfully injected {assignments_added} valid lab assignments into PostgreSQL!")
+    print(f"🎉 BOOM! Successfully injected {assignments_added} full assignments into PostgreSQL!")
 
 except Exception as e:
     print(f"❌ Database Error: {e}")
