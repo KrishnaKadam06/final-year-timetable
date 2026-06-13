@@ -84,6 +84,13 @@ def get_timetable(term: str):
         
         # Run the solver
         result = build_schedule(target_term=term)
+        print("\n==============================")
+        print("RESULT TYPE:")
+        print(type(result))
+
+        print("\nRESULT SAMPLE:")
+        print(result)
+        print("==============================\n")
         
         if result:
             return {"status": "success", "data": result}
