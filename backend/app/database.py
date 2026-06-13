@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = "postgresql://postgres:manas123@localhost:5432/timetable_db"
+DATABASE_URL = "postgresql://postgres:manas123@localhost:5433/timetable_db"
 
 print("DATABASE URL =", DATABASE_URL)
 
