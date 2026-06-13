@@ -1,25 +1,28 @@
 import pandas as pd
 import os
+from sqlalchemy import text
 from app.database import engine, SessionLocal
 from app.models import Base, Faculty, Subject, Batch, SubjectFacultyAssignment
 
-print("🔄 Initializing Database...")
-# This automatically creates all tables defined in models.py if they don't exist
+print("[Database] Initializing Database (Dropping existing tables with CASCADE)...")
+with engine.begin() as conn:
+    for table_name in ["workload", "subject_faculty_assignments", "subjects", "faculty", "batches", "rooms"]:
+        conn.execute(text(f"DROP TABLE IF EXISTS {table_name} CASCADE;"))
 Base.metadata.create_all(bind=engine)
 
 # Path to the CSV we just created
 CSV_PATH = "EXTC_TT/Odd(2025-26)/cleaned_data/extracted_workloads.csv"
 
 if not os.path.exists(CSV_PATH):
-    print(f"❌ Error: Cannot find {CSV_PATH}. Make sure you are running this from the 'backend' folder.")
+    print(f"[Error] Cannot find {CSV_PATH}. Make sure you are running this from the 'backend' folder.")
     exit()
 
-print("📂 Reading CSV data...")
+print("[CSV] Reading CSV data...")
 df = pd.read_csv(CSV_PATH)
 db = SessionLocal()
 
 try:
-    print("⏳ Populating Master Tables (Faculty, Subjects, Batches)...")
+    print("[Database] Populating Master Tables (Faculty, Subjects, Batches)...")
     
     # 1. Insert Unique Faculty (Skipping the bugged "Lab-..." entries)
     faculties = df['faculty_initials'].dropna().unique()
@@ -45,7 +48,7 @@ try:
 
     db.commit()
 
-    print("⏳ Populating Workload Assignments...")
+    print("[Database] Populating Workload Assignments...")
     
     # Clear old assignments to prevent duplicates if you run this twice
     db.query(SubjectFacultyAssignment).delete()
@@ -70,10 +73,10 @@ try:
         assignments_added += 1
     
     db.commit()
-    print(f"🎉 BOOM! Successfully injected {assignments_added} valid lab assignments into PostgreSQL!")
+    print(f"[Success] Successfully injected {assignments_added} valid lab assignments into PostgreSQL!")
 
 except Exception as e:
-    print(f"❌ Database Error: {e}")
+    print(f"[Error] Database Error: {e}")
     db.rollback()
 finally:
     db.close()
